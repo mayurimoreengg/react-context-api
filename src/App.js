@@ -3,15 +3,19 @@ import './style.css';
 import ComponentA from './components/ComponentA';
 
 const User = createContext();
+const Subject = createContext();
 
 export default function App() {
   const [username, setUsername] = useState('Mayuri');
   const [clicks, setClicks] = useState(true);
+  const [sub, setSub] = useState('Math');
   const handleChangeUser = () => {
     if (clicks === true) {
       setUsername('Nisha');
+      setSub('Marathi');
     } else {
       setUsername('Mayuri');
+      setSub('Maths');
     }
     setClicks(!clicks);
   };
@@ -23,11 +27,14 @@ export default function App() {
           Change User
         </button>
       </h1>
+      <p>My favourite subject is {sub}</p>
       <User.Provider value={username}>
-        <ComponentA />
+        <Subject.Provider value={sub}>
+          <ComponentA />
+        </Subject.Provider>
       </User.Provider>
     </div>
   );
 }
 
-export { User };
+export { User, Subject };
